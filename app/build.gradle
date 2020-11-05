@@ -10,7 +10,11 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        def secureProps = new Properties()
+        if (file("../secure.properties").exists()) {
+            file("../secure.properties")?.withInputStream { secureProps.load(it) }
+        }
+        resValue "string", "maps_api_key", (secureProps.getProperty("MAPS_API_KEY") ?: "AIzaSyBnpVOF12RA6KE87azWgrcTZuWnAhiUNhY")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

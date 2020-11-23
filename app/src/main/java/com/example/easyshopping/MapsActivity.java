@@ -1,6 +1,8 @@
 package com.example.easyshopping;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -15,28 +17,40 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    Location currentLocation;
+
+import java.io.Serializable;
+
+public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallback , Serializable {
+    public static Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
+
+//        Gson gson = new Gson();
+//        Intent i = new Intent(this,DetailsView.class);
+//        i.putExtra("myjson", gson.toJson(currentLocation));
+//        Intent i = new Intent(this,DetailsView.class);
+//        i.putExtra("MyClass", currentLocation);
     }
 
-    private void fetchLocation() {
+    public Location fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
+         //   return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -51,6 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
+        return currentLocation;
     }
 
     @Override
@@ -60,6 +75,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.addMarker(markerOptions);
+
+//        Intent returnIntent = new Intent();
+//        returnIntent.putExtra("picked_point",latLng);
+//        setResult(Activity.RESULT_OK,returnIntent);
+//        if(Activity.RESULT_OK ==-1)
+//        finish();
     }
 
     @Override

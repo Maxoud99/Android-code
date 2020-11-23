@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#94DC75">
+
+
+    <TextView
+        android:id="@+id/textViewProductsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+
+        android:textColor="@color/bg_register"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+        android:textColor="#3F51B5"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textViewProductsDescName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+
+        android:textColor="@color/bg_register"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewProductsDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="1"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+        android:textColor="#3F51B5"
+        android:textSize="20dp" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_row="4"
+        android:layout_column="1"
+        android:layout_gravity="bottom|clip_horizontal|center|clip_vertical|start|right|center_horizontal|fill|fill_horizontal|top|left|center_vertical|fill_vertical|end"
+        app:cardBackgroundColor="#253C26"
+        app:cardCornerRadius="30dp">
+
+        <GridLayout
+            android:id="@+id/GridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/input_register_hint">
+
+            <TextView
+                android:id="@+id/textViewShopsNames"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/holo_orange_light"
+                android:gravity="center"
+                android:textColor="#0E0E0E"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewPrices"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textViewOffers"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/textViewDistance"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@android:color/background_light"
+                android:textSize="20dp" />
+
+        </GridLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</GridLayout>

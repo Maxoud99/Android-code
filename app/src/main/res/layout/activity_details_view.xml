@@ -9,6 +9,28 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
+        android:layout_height="680dp"/>
+<!--        android:longClickable="true"-->
+
+
+    <Button
+        android:id="@+id/btnfilterPrice"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dip"
+        android:background="#ECEEF1"
+        android:text="filter price"
+        android:textColor="#26AE90" />
+    <Button
+        android:id="@+id/btnfilterdistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="#ECEEF1"
+        android:text="filter distance"
+        android:textColor="#26AE90" />
 </RelativeLayout>

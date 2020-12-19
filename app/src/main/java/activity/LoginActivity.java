@@ -4,7 +4,9 @@ package activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.easyshopping.MainActivity;
 import com.example.easyshopping.R;
+import com.example.easyshopping.MyCartActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +45,7 @@ public class LoginActivity extends Activity {
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -143,6 +147,17 @@ public class LoginActivity extends Activity {
 //                        String phoneNumber = user.getString("phoneNumber");
                         String created_at = user
                                 .getString("created_at");
+                        String id=user.getString("id");
+
+//                        Intent intent7=new Intent(getApplicationContext(), MyCartActivity.class);
+//                        intent7.putExtra("user_idd",id+"");
+//                        Log.d(TAG,"ffffffffffffffffffffffffffff");
+//                        startActivityForResult(intent7,0);
+//                        finish();
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("user_idd",id+"");
+                        editor.apply();
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);

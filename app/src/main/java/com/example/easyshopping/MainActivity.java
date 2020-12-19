@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     private Button btnLogout;
     private Button btnMaps;
     private Button btnProducts;
+    private Button btnSaved;
     private SQLiteHandler db;
     private SessionManager session;
 
@@ -37,6 +38,7 @@ public class MainActivity extends Activity {
         btnLogout = (Button) findViewById(R.id.btnLogout);
         btnMaps=(Button) findViewById(R.id.btnMaps);
         btnProducts = (Button) findViewById(R.id.btnProducts);
+        btnSaved=(Button) findViewById(R.id.btnSaved);
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
@@ -81,6 +83,13 @@ public class MainActivity extends Activity {
                 products();
             }
         });
+        btnSaved.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                save();
+            }
+        });
     }
 
     /**
@@ -108,6 +117,13 @@ public class MainActivity extends Activity {
 
         // Launching the products activity
         Intent intent = new Intent(MainActivity.this, ProductsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    private void save() {
+
+        // Launching the products activity
+        Intent intent = new Intent(MainActivity.this, MyCartActivity.class);
         startActivity(intent);
         finish();
     }

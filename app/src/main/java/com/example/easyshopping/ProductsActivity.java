@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,45 +30,30 @@ public class ProductsActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayList<String> ProductsNames = new ArrayList<>();
-
+    private ArrayList<Integer> ProductsId = new ArrayList<>();
     private ArrayList<String> ProductsDesc = new ArrayList<>();
 
     private ArrayList<String>imageid = new ArrayList<>();
     //this method is actually fetching the json string
     private void getJSON(final String urlWebService) {
-        /*
-         * As fetching the json string is a network operation
-         * And we cannot perform a network operation in main thread
-         * so we need an AsyncTask
-         * The constrains defined here are
-         * Void -> We are not passing anything
-         * Void -> Nothing at progress update as well
-         * String -> After completion it should return a string and it will be the json string
-         * */
+
         class GetJSON extends AsyncTask<Void, Void, String> {
 
-            //this method will be called before execution
-            //you can display a progress bar or something
-            //so that user can understand that he should wait
-            //as network operation may take some time
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
             }
 
-            //this method will be called after execution
-            //so here we are displaying a toast with the json string
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-//                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-//                System.out.println("I am in postExec");
+
 
 
                 try {
                     loadIntoListView(s);
                 } catch (JSONException e) {
-//                    System.out.println(e.toString());
                 }
             }
 
@@ -131,6 +117,7 @@ public class ProductsActivity extends AppCompatActivity {
 
             //getting the name from the json object and putting it inside string array
             ProductsNames.add(obj.getString("name"));
+            ProductsId.add(obj.getInt("id"));
             ProductsDesc.add(obj.getString("description"));
             imageid.add( obj.getString("image_url"));
         }
@@ -141,7 +128,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getJSON("http://192.168.1.2/project/index.php");
+        getJSON("http://192.168.1.3/project/index.php");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
         // Setting header
@@ -150,12 +137,9 @@ public class ProductsActivity extends AppCompatActivity {
         textView.setText("List Of Products");
 
         listView=(ListView)findViewById(R.id.list);
-//        Toast.makeText(getApplicationContext(), ProductsNames.toString(), Toast.LENGTH_SHORT).show();
-//        System.out.println(listView.toString()+" list");
-//        System.out.println(textView.toString()+" text");
 
         listView.addHeaderView(textView);
-//        System.out.println(ProductsNames.toString());
+        StrictMode.setThreadPolicy((new StrictMode.ThreadPolicy.Builder().permitNetwork().build()));
         // For populating list data
         ProductList productList = new ProductList(this, ProductsNames, ProductsDesc, imageid);
         listView.setAdapter(productList);
@@ -167,19 +151,12 @@ public class ProductsActivity extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        if (position==0){
-                            Intent intent6=new Intent(view.getContext(),DetailsView.class);
-                            startActivityForResult(intent6,0);
-//                        }
 
-//                        if (position==1){
-//                            Intent intent6=new Intent(view.getContext(),AlPrince.class);
-//                            startActivityForResult(intent6,1);
-//                        }
-//                        if (position==2){
-//                            Intent intent6=new Intent(view.getContext(),ElEkhtyar.class);
-//                            startActivityForResult(intent6,2);
-//                        }
+                            Intent intent6=new Intent(view.getContext(),DetailsView.class);
+                            intent6.putExtra("MyValue",ProductsId.get(position-1)+"");
+                            startActivityForResult(intent6,0);
+                            finish();
+
 
 
                     }

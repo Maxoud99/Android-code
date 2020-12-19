@@ -43,6 +43,16 @@
             android:textColor="@color/white"
             android:textSize="15dp" />
         <Button
+            android:id="@+id/btnSaved"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:background="#FF6861"
+            android:text="My Cart"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+        <Button
             android:id="@+id/btnMaps"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -62,6 +72,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15dp" />
+
     </LinearLayout>
 
 </RelativeLayout>

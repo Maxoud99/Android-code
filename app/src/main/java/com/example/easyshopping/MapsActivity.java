@@ -38,11 +38,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
 
-//        Gson gson = new Gson();
-//        Intent i = new Intent(this,DetailsView.class);
-//        i.putExtra("myjson", gson.toJson(currentLocation));
-//        Intent i = new Intent(this,DetailsView.class);
-//        i.putExtra("MyClass", currentLocation);
+
     }
 
     public Location fetchLocation() {
@@ -76,11 +72,7 @@ public class MapsActivity extends AppCompatActivity  implements OnMapReadyCallba
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.addMarker(markerOptions);
 
-//        Intent returnIntent = new Intent();
-//        returnIntent.putExtra("picked_point",latLng);
-//        setResult(Activity.RESULT_OK,returnIntent);
-//        if(Activity.RESULT_OK ==-1)
-//        finish();
+
     }
 
     @Override

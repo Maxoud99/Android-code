@@ -40,12 +40,14 @@ public class DetailsViewList extends ArrayAdapter implements Serializable {
     private ArrayList<String> ShopsNames;
     private ArrayList<String> Prices;
     private ArrayList<String> Offers;
-    private ArrayList<String> Long;
+    private ArrayList<String> distance;
     private ArrayList<String> Lat;
+    private ArrayList<String> Long;
+
     private Activity context;
     private  Location l;
 
-    public DetailsViewList(Activity context, ArrayList<String> ProductsNames, ArrayList<String> ProductsDesc, ArrayList<String> ShopsNames, ArrayList<String> Prices, ArrayList<String> Offers, ArrayList<String> Long, ArrayList<String> Lat, Location l) {
+    public DetailsViewList(Activity context, ArrayList<String> ProductsNames, ArrayList<String> ProductsDesc, ArrayList<String> ShopsNames, ArrayList<String> Prices, ArrayList<String> Offers, ArrayList<String>distance, ArrayList<String> Lat, ArrayList<String> Long) {
         super(context, R.layout.row_item_details, ProductsNames);
         this.context = context;
         this.ProductsNames = ProductsNames;
@@ -53,39 +55,14 @@ public class DetailsViewList extends ArrayAdapter implements Serializable {
         this.ShopsNames = ShopsNames;
         this.Prices = Prices;
         this.Offers = Offers;
-        this.Long = Long;
-        this.Lat = Lat;
-        this.l=l;
+        this.distance=distance;
+        this.Lat=Lat;
+        this.Long=Long;
 
     }
 
 
-    public static String distance(double lat1,double lat2, double lon1, double lon2)
-    {
 
-        // math تحتوي وحدة
-        // toRadians على الدالة
-        // والتي تحوّل الزوايا من نظام الدرجات إلى نظام نصف القطر
-        lon1 = Math.toRadians(lon1);
-        lon2 = Math.toRadians(lon2);
-        lat1 = Math.toRadians(lat1);
-        lat2 = Math.toRadians(lat2);
-
-        // صيغة هافرساين
-        double dlon = Math.sqrt((lon2 - lon1)*(lon2 - lon1));
-        double dlat = Math.sqrt((lat2 - lat1)*(lat2 - lat1));
-        double a = Math.pow(Math.sin(dlat / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(dlon / 2),2);
-
-        double c = 2 * Math.asin(Math.sqrt(a));
-
-        // نصف قطر الكرة الأرضية بوحدات الكيلومتر
-        double r = 6371;
-
-        // حساب النتيجة
-        return((int)(c * r)+"");
-    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row=convertView;
@@ -102,8 +79,8 @@ public class DetailsViewList extends ArrayAdapter implements Serializable {
         TextView textViewDistance = (TextView) row.findViewById(R.id.textViewDistance);
 //        TextView textViewLat = (TextView) row.findViewById(R.id.textViewLat);
        if(position==0){
-           textViewProductsName.setText("product name");
-           textViewProductsDescName.setText("description");
+           textViewProductsName.setText("PRODUCT NAME");
+           textViewProductsDescName.setText("DESCRIPTION");
         textViewProducts.setText(ProductsNames.get(position));
         textViewProductsDesc.setText(ProductsDesc.get(position));
         }
@@ -116,7 +93,7 @@ public class DetailsViewList extends ArrayAdapter implements Serializable {
         textViewShopsNames.setText(ShopsNames.get(position));
         textViewPrices.setText(Prices.get(position)+" L.E");
         textViewOffers.setText(Offers.get(position));
-        textViewDistance.setText(distance(Double.parseDouble(Lat.get(position)),l.getLatitude(),Double.parseDouble(Long.get(position)),l.getLongitude())+" km");
+        textViewDistance.setText(distance.get(position) +" km");
 
         return  row;
     }
